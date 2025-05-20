@@ -19,4 +19,20 @@ def calculadora():
         print(f"Resultado {a ** b}")
     else: 
         print('Opção Inválida')
-calculadora()
+
+def regradetres():
+    a = float(input('[X] []\n [] [?]\nDigite o Numero do X: '))
+    b = float(input (f'{int(a)} [X]\n [] [?]\nDigite o Numero do X:'))
+    c = float(input (f'{int(a)} {int(b)}\n [X] [?]\nDigite o Numero do X:'))
+    print(f'{int(a)} {int(b)}\n{int(c)} [?]')
+    print('1. Direta\n2. Inversa')
+    option = input('Escolha o tipo de conta: ')
+
+    if option == '1':
+        d = c * b / a
+        print(f'Resultado: {int(d)}')
+    if option == '2':
+        d = a * b / c
+        print(f'Resultado: {int(d)}')
+regradetres()
+    
