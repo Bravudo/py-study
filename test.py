@@ -29,10 +29,10 @@ def regradetres():
     option = input('Escolha o tipo de conta: ')
 
     if option == '1':
-        d = c * b / a
+        d = (c * b) / a
         print(f'Resultado: {int(d)}')
     if option == '2':
-        d = a * b / c
+        d = (a * b) / c
         print(f'Resultado: {int(d)}')
 regradetres()
     
