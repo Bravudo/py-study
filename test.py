@@ -1,38 +1,32 @@
-import sys
+import asyncio
+import time
 
+async def EsperarFila():
+    print('inicio da fila')
+    await asyncio.sleep(5)
+    print('fim da fila')
+    return time.time()
 
-def calculadora():
-    print ('1. soma \n2. Subtração \n3. Multiplicação\n4. Divisão \n5. Potenciação')
-    option = input('Escolha entre 1 e 4:')
-    a = float(input('Primeiro Numero: '))
-    b = float(input('Segundo Numero: '))
+async def suaMae():
+    print('Esperando o Filho pra ir Embora')
+    fim_fila = await EsperarFila()
+    print('Agora Vamos de Carro')
 
-    if option == "1":
-        print(f'Resultado {a + b}')
-    elif option == "2":
-        print(f'Resultado {a - b}')
-    elif option == "3":
-        print(f'Resultado {a * b}')
-    elif option == "4":
-        print(f'Resultado {a / b}')
-    elif option == "5": 
-        print(f"Resultado {a ** b}")
-    else: 
-        print('Opção Inválida')
+    return fim_fila
 
-def regradetres():
-    a = float(input('[X] []\n [] [?]\nDigite o Numero do X: '))
-    b = float(input (f'{int(a)} [X]\n [] [?]\nDigite o Numero do X:'))
-    c = float(input (f'{int(a)} {int(b)}\n [X] [?]\nDigite o Numero do X:'))
-    print(f'{int(a)} {int(b)}\n{int(c)} [?]')
-    print('1. Direta\n2. Inversa')
-    option = input('Escolha o tipo de conta: ')
+async def MaquinaDaVida():
+    inicio = time.time()
 
-    if option == '1':
-        d = (c * b) / a
-        print(f'Resultado: {int(d)}')
-    if option == '2':
-        d = (a * b) / c
-        print(f'Resultado: {int(d)}')
-regradetres()
-    
+    fimfila = await suaMae()
+    fimfila = fimfila - inicio
+    print('fim')
+    fim = time.time()
+
+    fim = fim - inicio
+
+    inicio = inicio - inicio
+
+    print(f' inicio {inicio:.3f}s, fimFila {fimfila:.4f}s, fimtotal {fim:.4f}s ')
+
+asyncio.run(MaquinaDaVida())
+
