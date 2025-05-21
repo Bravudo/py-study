@@ -1,32 +1,16 @@
 import asyncio
 import time
 
-async def EsperarFila():
-    print('inicio da fila')
-    await asyncio.sleep(5)
-    print('fim da fila')
-    return time.time()
 
-async def suaMae():
-    print('Esperando o Filho pra ir Embora')
-    fim_fila = await EsperarFila()
-    print('Agora Vamos de Carro')
+async def timer():
+    start = time.time()
+    print(f'Iniciando: {time.time() - start:.2f}s')
 
-    return fim_fila
+    await asyncio.sleep(3)
+    print(f'Se passaram {time.time() - start:.3f}s')
 
-async def MaquinaDaVida():
-    inicio = time.time()
+    await asyncio.sleep(4)
 
-    fimfila = await suaMae()
-    fimfila = fimfila - inicio
-    print('fim')
-    fim = time.time()
+    print(f'-------\nTotal: {time.time() - start:.3f}s')
 
-    fim = fim - inicio
-
-    inicio = inicio - inicio
-
-    print(f' inicio {inicio:.3f}s, fimFila {fimfila:.4f}s, fimtotal {fim:.4f}s ')
-
-asyncio.run(MaquinaDaVida())
-
+asyncio.run(timer())
