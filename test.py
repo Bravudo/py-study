@@ -2,15 +2,36 @@ import asyncio
 import time
 
 
-async def timer():
+async def download(tamanho, url):
     start = time.time()
-    print(f'Iniciando: {time.time() - start:.2f}s')
 
-    await asyncio.sleep(3)
-    print(f'Se passaram {time.time() - start:.3f}s')
+    t = await tempo(tamanho)
 
-    await asyncio.sleep(4)
+    print('-----DOWNLOAD-----')
+    print(f'Iniciando Download: {url}')
+    print(f'Tempo Estimado: {t:.0f}s')
 
-    print(f'-------\nTotal: {time.time() - start:.3f}s')
+    await asyncio.sleep(t)
+    print(f'----------\nDownalod: {url}: Concluido')
 
-asyncio.run(timer())
+async def tempo(c):
+    
+    a = 1 #tamanho do arquivo
+    b = 2 #tempo por tamanho
+    d = b * c / a
+
+    return d
+
+async def DownloadFinal():
+    
+    arquivo1 = 2
+    arquivo1name = 'PesadãoGames.png'
+    task = asyncio.create_task(download(arquivo1, arquivo1name))
+    arquivo2 = 4
+    arquivo2name = 'Hack.virus.legal.exe'
+    task2 = asyncio.create_task(download(arquivo2, arquivo2name))
+
+    await task
+    await task2
+
+asyncio.run(DownloadFinal())
