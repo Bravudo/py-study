@@ -1,8 +1,15 @@
-produtos = ["Maçã", "Banana", "Pão"]
-precos = [2.5, 1.8, 3.0]
-quantidades = [3, 5, 2]
+membros = {
+    "Alice": {"cargo": "Moderador", "pontos": 50},
+    "Bob": {"cargo": "Membro", "pontos": 30},
+    "Carlos": {"cargo": "Moderador","pontos": 20}
+}
 
-total = 0
-for i in range(len(produtos)):
-    total += precos[i] * quantidades[i]
-print(f'Total dos Produtos {total}')
+
+totalpontos = 0
+totalmoderador = 0
+for nome, inf in membros.items():
+    totalpontos += inf['pontos']
+    if inf['cargo'] == 'Moderador':
+        totalmoderador += 1
+
+print(f'p:{totalpontos}, Moderador:{totalmoderador}')
