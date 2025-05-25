@@ -1,8 +1,9 @@
-calculo = [1, 2, 3]
 contas = [45, 28, 92]
+calculo = [1, 2, 3]
 totalquadrada = 0
 
-for calc in calculo:
-    for number in contas:
-        totalquadrada = number * number
-    print(f'{contas} x {contas} {totalquadrada} - ')
+for number in contas:
+    for calc in calculo:
+        totalquadrada = number * calc
+        print(f'{calc} x {number} = {totalquadrada} ')
+    print(f'-------------')
