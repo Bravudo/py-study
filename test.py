@@ -1,15 +1,8 @@
-membros = {
-    "Alice": {"cargo": "Moderador", "pontos": 50},
-    "Bob": {"cargo": "Membro", "pontos": 30},
-    "Carlos": {"cargo": "Moderador","pontos": 20}
-}
+calculo = [1, 2, 3]
+contas = [45, 28, 92]
+totalquadrada = 0
 
-
-totalpontos = 0
-totalmoderador = 0
-for nome, inf in membros.items():
-    totalpontos += inf['pontos']
-    if inf['cargo'] == 'Moderador':
-        totalmoderador += 1
-
-print(f'p:{totalpontos}, Moderador:{totalmoderador}')
+for calc in calculo:
+    for number in contas:
+        totalquadrada = number * number
+    print(f'{contas} x {contas} {totalquadrada} - ')
