@@ -1,6 +1,9 @@
 #Projeto Para melhora de lógica matematica
 
-p = [{ 'nome': 'cleiton', 'invI': 10000, 'PontosReunião': 6, 'horatrabalhada': 233, 'div': 0 },{ 'nome': 'jorge', 'invI': 2322, 'PontosReunião': 10, 'horatrabalhada': 233, 'div': 0}]
+p = [{ 'nome': 'Cleiton', 'invI': 10000, 'PontosReunião': 6, 'horatrabalhada': 233, 'direito': 0 },
+     { 'nome': 'Jorge', 'invI': 2322, 'PontosReunião': 10, 'horatrabalhada': 233, 'direito': 0},
+     { 'nome': 'Gustavo', 'invI': 5076, 'PontosReunião':9, 'horatrabalhada': 482, 'direito': 0},
+     { 'nome': 'Rafael', 'invI': 7592, 'PontosReunião': 7, 'horatrabalhada': 352, 'direito': 0}]
 empresa = {'nome':'MadeInChina', 'lucro': 30000}
 
 
@@ -19,20 +22,21 @@ def repasseDeLucros():
         totalPontos += pontos
         totalHoras += horas
         qtdSocios += 1
-
-    print(f'Total Investimento: {totalInvestimento}. Total Pontos: {totalPontos}. Total Horas:{totalHoras}')        
+    
+    print(f'---- Totais Gerais da Empresa {empresa['nome']} ----\nTotal Investimento: {totalInvestimento}. Total Pontos de Reunião: {totalPontos}. Total Horas:{totalHoras}\n')        
 
     #Porcentagem dos Valores
     pInvestimento = totalInvestimento / 100
     pPontos = totalPontos / 100
     pHoras = totalHoras / 100
+    print(f'---- Relatório de Repartição de lucros ----')
 
     for socio in p:
         nome = socio['nome']
         investimentoInicial = socio['invI']
         pontos = socio['PontosReunião']
         horas = socio['horatrabalhada']
-        pontuacaofinal = socio['div']
+        pontuacaofinal = socio['direito']
         
 
         
@@ -47,6 +51,6 @@ def repasseDeLucros():
         lucroRepartido = (empresa['lucro'] * 0.5)  / 100
         lucroRepartido = lucroRepartido * pontuacaofinal
 
-        print(f'----\n{socio['nome']}\nInvestimento: {spInvestimento:.1f}%\nPontuação Média: {spPontos:.0f}%\nHoras: {spHoras:.0f}%\nDireito a lucro: {pontuacaofinal:.1f}%\nGanho: R${lucroRepartido:.2f}')
+        print(f'\n{socio['nome']}\nInvestimento: {spInvestimento:.1f}%\nReunião: {spPontos:.0f}%\nHoras: {spHoras:.0f}%\nDireito: {pontuacaofinal:.1f}%\nLucro líquido: R${lucroRepartido:.2f}')
     
 repasseDeLucros()
