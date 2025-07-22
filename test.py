@@ -8,10 +8,11 @@ empresa = {'nome':'MadeInChina', 'lucro': 30000}
 
 
 def repasseDeLucros():
-    qtdSocios = 0
     totalInvestimento = 0
     totalPontos = 0
     totalHoras = 0
+
+    lucroEmpresa = empresa['lucro']
 
     for socio in p:
         investimentoInicial = socio['invI']
@@ -21,7 +22,6 @@ def repasseDeLucros():
         totalInvestimento += investimentoInicial
         totalPontos += pontos
         totalHoras += horas
-        qtdSocios += 1
     
     print(f'---- Totais Gerais da Empresa {empresa['nome']} ----\nTotal Investimento: {totalInvestimento}. Total Pontos de Reunião: {totalPontos}. Total Horas:{totalHoras}\n')        
 
@@ -48,9 +48,15 @@ def repasseDeLucros():
         pontuacaofinal = spHoras + spPontos + spInvestimento 
         pontuacaofinal = pontuacaofinal / 3 # 3 é a quantidade de medidas que eu usei no calculo
 
+        # Lucro por Pessoa
         lucroRepartido = (empresa['lucro'] * 0.5)  / 100
         lucroRepartido = lucroRepartido * pontuacaofinal
-
+       
+       # Lucro Restante da Empresa
+        lucroEmpresa = lucroEmpresa - lucroRepartido
         print(f'\n{socio['nome']}\nInvestimento: {spInvestimento:.1f}%\nReunião: {spPontos:.0f}%\nHoras: {spHoras:.0f}%\nDireito: {pontuacaofinal:.1f}%\nLucro líquido: R${lucroRepartido:.2f}')
     
+    print(f'\n---- Dinheiro Restante para a empresa ----\nR${lucroEmpresa:.2f}')
+   
+   
 repasseDeLucros()
