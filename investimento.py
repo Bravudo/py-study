@@ -3,34 +3,36 @@ import requests
 # API do Banco Central
 url = "https://api.bcb.gov.br/dados/serie/bcdata.sgs.10813/dados/ultimos/1?formato=json"
 cotacao = requests.get(url).json()
-
-
-TempoInvestimento = 12
 ValorDolar = float(cotacao[0]['valor'].replace(',','.'))
-DinheiroParaInvestir = 500 / ValorDolar
+
+DinheiroParaInvestir = int(1000) / ValorDolar
+print(f'Arredondamento: ${int(DinheiroParaInvestir)}')
+
+#perfil
+TempoInvestimento = 12
 Int_DinheiroParaInvestir = int(DinheiroParaInvestir)
-print(f'Saldo em Dolar: ${DinheiroParaInvestir:.2f}')
+# Risco: 0 a 10
 RiscoMedio = 5
+
+print(f'Saldo Total: ${DinheiroParaInvestir:.2f}')
 
 
 ação = [
     #ativos agressivos
     {'nome': 'PALANTIR TECHNOLOGIES INC', 'code': 'PLTR', 'preco': 148.7, 'risco': 7, 'tempo': TempoInvestimento, 'retorno': 13},
     {'nome': 'NVIDIA CORPORATION', 'code': 'NVDA', 'preco': 167.8, 'risco': 7, 'tempo': TempoInvestimento, 'retorno': 9},
-    
     #dividendos passivos
     {'nome': 'MAIN', 'code': 'NVDA', 'preco': 64.1, 'risco': 1, 'tempo': TempoInvestimento, 'retorno': 1 }
 ]
 
+def Escolha():
+    qtdEscolhas = 0
 
-dp = [[0 for w in range(Int_DinheiroParaInvestir + 1)] for i in range(len(ação) + 1)]
+    for acao in ação:
+        preco = acao['preco']
+        qtdEscolhas += preco    
+    qtdEscolhas = int(qtdEscolhas) / len(ação)
+    media = DinheiroParaInvestir / int(qtdEscolhas) 
+    print((media))
 
-for i in range (1, len(ação) + 1):
-    preco = int(ação[i-1]['preco'])
-    retorno = int(ação[i-1]['retorno'])
-
-    for w in range(Int_DinheiroParaInvestir + 1):
-        if preco > w:
-            dp[i][w] = dp[i-1][w]
-        else:
-
+Escolha()
