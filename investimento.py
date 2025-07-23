@@ -42,6 +42,15 @@ def MaquinaDeEscolha():
     qtdAtivoPassivo = (DivisaoDeAcoesNaCarteira/10) * (AtivoRiscoBaixo) 
 
     print(f'Ativos\n Alto Risco: {qtdAtivoPerigo:.1f}\n Médio Risco: {qtdAtivoMediano:.1f} Baixo Risco: {qtdAtivoPassivo:.1f}')
+
+
     
 
 MaquinaDeEscolha()
+
+
+
+#Comprar Ações de uma lista proporcionalmente a quantidade de risco escolhido por cada ativo
+#Separar pela quantidade de ações diferentes definidas para escolher
+#Separar por riscos
+#Escolher o melhor retorno 
