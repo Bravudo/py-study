@@ -76,7 +76,7 @@ def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
             comprar = DinheiroCadaAtivo / preco
             print(f'{nome}: Comprar {comprar:.3f} ações')
 
-        listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'])
+        listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'] / x['preco'])
         print(f'Ação Custo Beneficio: {listaAtivosDisponiveis['nome']} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
 
     
