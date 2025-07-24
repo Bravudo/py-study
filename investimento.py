@@ -6,7 +6,9 @@ cotacao = requests.get(url).json()
 ValorDolar = float(cotacao[0]['valor'].replace(',','.'))
 
 
-
+ConfigRiscoAlto = [7, 10]
+ConfigRiscoMedio = [3,6]
+ConfigRiscoBaixo = [0, 2]
 
 #Perfil
 TempoInvestimento = 12
@@ -42,23 +44,22 @@ def MaquinaDeEscolha():
 
     print(int(DinheiroAlto))
 
-    #Quanto  em porcentagem comprar de cada ativo
+    #Quanto comprar de cada ativo (porcentagem)
     qtdAtivoAlto = (DivisaoDeAcoesNaCarteira/10) * (AtivoRiscoAlto)
     qtdAtivoMedio = (DivisaoDeAcoesNaCarteira/10) * (AtivoRiscoMedio) 
     qtdAtivoBaixo = (DivisaoDeAcoesNaCarteira/10) * (AtivoRiscoBaixo) 
 
-    EscolhaDeAcoes(qtdAtivoAlto, DinheiroAlto)
-
-
-
     print(f'Quantidade de Ativos\n Alto Risco: {qtdAtivoAlto:.1f}\n Médio Risco: {qtdAtivoMedio:.1f}\n Baixo Risco: {qtdAtivoBaixo:.1f}')
 
+    EscolhaDeAcoes(qtdAtivoAlto, DinheiroAlto, ConfigRiscoAlto)
 
 
 
-def EscolhaDeAcoes(qtdAtivo, qtdDinheiro):
-    Nome = ação[0]['nome']
-    print(Nome)
+def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
+     if qtdAtivo > 0 and qtdDinheiro > 0:
+        listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1)]
+        print(f'{listaAtivosDisponiveis}')
+
 
 
 
