@@ -21,7 +21,9 @@ AtivoRiscoAlto = 5 # Risco 7 ao 10
 AtivoRiscoMedio = 2 # Risco 3 ao 6
 AtivoRiscoBaixo = 3 # Risco 0 ao 2
 
-print(f'Saldo para investimento: ${DinheiroParaInvestir:.2f}')
+
+# print(f'Saldo para investimento: ${DinheiroParaInvestir:.2f}')
+
 
 #O Retorno significa quanto mensalmente ela te devolve em porcentagem.
 ação = [
@@ -42,7 +44,7 @@ def MaquinaDeEscolha():
     DinheiroMedio = (dinheiro / 100) * (AtivoRiscoMedio * 10)
     DinheiroBaixo = (dinheiro / 100) * (AtivoRiscoBaixo * 10)
 
-    print(int(DinheiroAlto))
+    print(f'Dinheiro do Risco Alto ${int(DinheiroAlto)}')
 
     #Quanto comprar de cada ativo (porcentagem)
     qtdAtivoAlto = (DivisaoDeAcoesNaCarteira/10) * (AtivoRiscoAlto)
@@ -58,7 +60,13 @@ def MaquinaDeEscolha():
 def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
      if qtdAtivo > 0 and qtdDinheiro > 0:
         listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1)]
-        print(f'{listaAtivosDisponiveis}')
+        for acao in listaAtivosDisponiveis:
+            nome = acao['nome']
+            risco = acao['risco']
+            retorno = acao['retorno']
+
+            print(f'Ação: {nome} - Risco: {risco} - Retorno: {retorno}%/mês')
+       
 
 
 
