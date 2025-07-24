@@ -58,6 +58,7 @@ def MaquinaDeEscolha():
 
 
 def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
+     
      if qtdAtivo > 0 and qtdDinheiro > 0:
         listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1)]
         for acao in listaAtivosDisponiveis:
@@ -65,8 +66,8 @@ def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
             risco = acao['risco']
             retorno = acao['retorno']
 
-            print(f'Ação: {nome} - Risco: {risco} - Retorno: {retorno}%/mês')
-       
+        listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'])
+        print(f'Ação Custo Beneficio: {listaAtivosDisponiveis['nome']} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
 
 
 
