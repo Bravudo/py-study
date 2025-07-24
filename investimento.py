@@ -35,6 +35,8 @@ ação = [
     {'nome': 'MAIN', 'code': 'NVDA', 'preco': 64.1, 'risco': 1, 'tempo': TempoInvestimento, 'retorno': 1 }
 ]
 
+#Seus ativos serão registrados aqui
+carteira = []
 
 
 def MaquinaDeEscolha():
@@ -75,8 +77,12 @@ def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
             preco = acao['preco']
             comprar = DinheiroCadaAtivo / preco
             print(f'{nome}: Comprar {comprar:.3f} ações')
-
+        
+        # Filtro pela melhor ação custo beneficio   
         listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'] / x['preco'])
+        carteira.append(listaAtivosDisponiveis)
+        print(carteira)
+
         print(f'Ação Custo Beneficio: {listaAtivosDisponiveis['nome']} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
 
     
