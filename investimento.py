@@ -13,13 +13,13 @@ ConfigRiscoBaixo = [0, 2]
 #Perfil
 TempoInvestimento = 12
 DinheiroParaInvestir = int(1000) / ValorDolar
-DivisaoDeAcoesNaCarteira = 6 # Quantidade de Ações diferentes em sua carteira
+DivisaoDeAcoesNaCarteira = 3 # Quantidade de Ações diferentes em sua carteira
 
 # Completar A lista proporcionalmente em quanto você quer que cada area da sua carteira tenha de risco
 # Risco: 0 a 10 - Completar até o total de 10
-AtivoRiscoAlto = 5 # Risco 7 ao 10
-AtivoRiscoMedio = 2 # Risco 3 ao 6
-AtivoRiscoBaixo = 3 # Risco 0 ao 2
+AtivoRiscoAlto = 6 # Risco 7 ao 10
+AtivoRiscoMedio = 3 # Risco 3 ao 6
+AtivoRiscoBaixo = 2 # Risco 0 ao 2
 
 Listas = ['Risco alto', 'Risco Médio', 'Risco Baixo']
 
@@ -68,28 +68,30 @@ def MaquinaDeEscolha():
 def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco, nomeRisco):
     print(f'-- Lista dos Ativos de {nomeRisco}')
     DinheiroCadaAtivo = qtdDinheiro / qtdAtivo
+    print(f'Dinheiro Investido: ${qtdDinheiro:.2f}')
     while qtdDinheiro > 0:
         listaAtivosDisponiveis = []
         if qtdAtivo > 0 and qtdDinheiro > 0:
             listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1) and ação not in carteira]
+            
             for acao in listaAtivosDisponiveis:
                 nome = acao['nome']
                 xRisco = acao['risco']
                 retorno = acao['retorno']
                 preco = acao['preco']
-                comprar = DinheiroCadaAtivo / preco
 
             # Filtro pela melhor ação custo beneficio   
             listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'] / x['preco'])
             carteira.append(listaAtivosDisponiveis)
             qtdDinheiro = qtdDinheiro - DinheiroCadaAtivo
+            
             if qtdAtivo >= 1:
                 qtdAtivo = qtdAtivo - 1
             else:
                 qtdAtivo = qtdAtivo - qtdAtivo
-
-
-            print(f'Nome: {listaAtivosDisponiveis['nome']} - Comprar: {comprar} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
+                
+    for acao in carteira:
+        print(f'Nome: {acao['nome']} - Comprar: { DinheiroCadaAtivo / acao['preco']:.4f} - Risco: {acao['risco']} - Retorno: {acao['retorno']}%/mês')
 
     
 
