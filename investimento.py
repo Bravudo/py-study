@@ -21,6 +21,8 @@ AtivoRiscoAlto = 5 # Risco 7 ao 10
 AtivoRiscoMedio = 2 # Risco 3 ao 6
 AtivoRiscoBaixo = 3 # Risco 0 ao 2
 
+Listas = ['Risco alto', 'Risco Médio', 'Risco Baixo']
+
 
 # print(f'Saldo para investimento: ${DinheiroParaInvestir:.2f}')
 
@@ -31,6 +33,7 @@ ação = [
     {'nome': 'PALANTIR TECHNOLOGIES INC', 'code': 'PLTR', 'preco': 148.7, 'risco': 8, 'tempo': TempoInvestimento, 'retorno': 13},
     {'nome': 'NVIDIA CORPORATION', 'code': 'NVDA', 'preco': 167.8, 'risco': 7, 'tempo': TempoInvestimento, 'retorno': 9},
     {'nome': 'JORGES MEDIA TV', 'code': 'JMT', 'preco': 17.8, 'risco': 10, 'tempo': TempoInvestimento, 'retorno': 14},
+    {'nome': 'JORGES MEDIA TV', 'code': 'JMT', 'preco': 227.8, 'risco': 10, 'tempo': TempoInvestimento, 'retorno': 12},
     #dividendos passivos
     {'nome': 'MAIN', 'code': 'NVDA', 'preco': 64.1, 'risco': 1, 'tempo': TempoInvestimento, 'retorno': 1 }
 ]
@@ -58,32 +61,35 @@ def MaquinaDeEscolha():
 
     print(f'Quantidade de Ativos\n Alto Risco: {qtdAtivoAlto:.1f}\n Médio Risco: {qtdAtivoMedio:.1f}\n Baixo Risco: {qtdAtivoBaixo:.1f}')
 
-    EscolhaDeAcoes(qtdAtivoAlto, DinheiroAlto, ConfigRiscoAlto)
+    EscolhaDeAcoes(qtdAtivoAlto, DinheiroAlto, ConfigRiscoAlto, Listas[0])
 
 
 
-def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco):
-     
-     DinheiroCadaAtivo = qtdDinheiro / qtdAtivo
+def EscolhaDeAcoes(qtdAtivo, qtdDinheiro, risco, nomeRisco):
+    print(f'-- Lista dos Ativos de {nomeRisco}')
+    DinheiroCadaAtivo = qtdDinheiro / qtdAtivo
+    while qtdDinheiro > 0:
+        listaAtivosDisponiveis = []
+        if qtdAtivo > 0 and qtdDinheiro > 0:
+            listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1) and ação not in carteira]
+            for acao in listaAtivosDisponiveis:
+                nome = acao['nome']
+                xRisco = acao['risco']
+                retorno = acao['retorno']
+                preco = acao['preco']
+                comprar = DinheiroCadaAtivo / preco
+
+            # Filtro pela melhor ação custo beneficio   
+            listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'] / x['preco'])
+            carteira.append(listaAtivosDisponiveis)
+            qtdDinheiro = qtdDinheiro - DinheiroCadaAtivo
+            if qtdAtivo >= 1:
+                qtdAtivo = qtdAtivo - 1
+            else:
+                qtdAtivo = qtdAtivo - qtdAtivo
 
 
-
-     if qtdAtivo > 0 and qtdDinheiro > 0:
-        listaAtivosDisponiveis = [ação for ação in ação if ação['risco'] in range(risco[0], risco[1] +1)]
-        for acao in listaAtivosDisponiveis:
-            nome = acao['nome']
-            risco = acao['risco']
-            retorno = acao['retorno']
-            preco = acao['preco']
-            comprar = DinheiroCadaAtivo / preco
-            print(f'{nome}: Comprar {comprar:.3f} ações')
-        
-        # Filtro pela melhor ação custo beneficio   
-        listaAtivosDisponiveis = max(listaAtivosDisponiveis,  key=lambda x: x['retorno'] / x['risco'] / x['preco'])
-        carteira.append(listaAtivosDisponiveis)
-        print(carteira)
-
-        print(f'Ação Custo Beneficio: {listaAtivosDisponiveis['nome']} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
+            print(f'Nome: {listaAtivosDisponiveis['nome']} - Comprar: {comprar} - Risco: {listaAtivosDisponiveis['risco']} - Retorno: {listaAtivosDisponiveis['retorno']}%/mês')
 
     
 
